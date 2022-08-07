@@ -26,7 +26,7 @@ stages{
                 stage ("Deploy to Staging"){
                     steps {
                         //sh "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
-                        sh "scp -rp -i StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
+                        sh "scp -vvv StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
                     }
                 }
             }
