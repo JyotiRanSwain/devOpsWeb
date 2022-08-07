@@ -25,7 +25,7 @@ stages{
         }
 
         stage ('Deployments'){
-                    stage ("Deploy to Production"){
+                    stage ('Deploy to Productio'){
                     steps {
                         sh "scp **/*.war jenkins@${params.tomcat_prod}:/usr/opt/tomcat/webapps/"
                 }
