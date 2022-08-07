@@ -7,7 +7,6 @@ pipeline {
     parameters {
          string(name: 'tomcat_stag', defaultValue: '3.111.144.29', description: 'Node1-Remote Staging Server')
              }
-
     triggers {
          pollSCM('* * * * *')
      }
