@@ -26,7 +26,7 @@ stages{
                 stage ("Deploy to Staging"){
                     steps {
                         sshagent(['b0962c0e-e3d6-4ff1-8cca-7a282bad7546']) {
-    sh "scp /workspace/Project-2/ **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
+    sh 'scp scp -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/'
     }
                     }
                 }
