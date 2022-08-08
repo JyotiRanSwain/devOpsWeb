@@ -21,15 +21,5 @@ stages{
             }
         }
 
-        stage ('Deployments'){
-            parallel{
-                stage ("Deploy to Staging"){
-                    steps {
-                        sh "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
-                        //sh 'scp -o StrictHostKeyChecking=no target/ **/*.war root@${params.staging_server}:/opt/tomcat/webapps/'
-                    }
-                }
-            }
-        }
     }
 }
