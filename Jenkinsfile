@@ -22,7 +22,7 @@ stages{
                 stage ("Deploy to Staging"){
                     steps {
                        sshagent(['b0962c0e-e3d6-4ff1-8cca-7a282bad7546']) {
-    sh "scp -v -o StrictHostKeyChecking=no **/*.war ec2-user@52.66.201.17:/opt/tomcat/webapps/"
+    sh "scp -o StrictHostKeyChecking=no **/*.war ec2-user@52.66.201.17:/opt/tomcat/webapps/"
 }
                     }
                 }
