@@ -1,0 +1,4 @@
+deploy.app.name=devopsweb
+deploy.env=sandbox
+deploy.type=prod
+deploy.version=1.2.1
