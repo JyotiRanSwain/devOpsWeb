@@ -31,7 +31,7 @@ pipeline {
                         script {
                         props = readProperties file: 'build.cnf'
                         }
-                        echo "current version is ${props['deply.version']}"
+                        echo "current version is ${props['deploy.version']}"
                     }
                 }
             }
