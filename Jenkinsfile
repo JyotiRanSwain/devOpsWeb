@@ -23,7 +23,15 @@ pipeline {
                     steps {
                         sshagent(['b0962c0e-e3d6-4ff1-8cca-7a282bad7546']) {
                        sh "scp -o StrictHostKeyChecking=no **/*.war ec2-user@43.205.146.16:/opt/tomcat/webapps/"
-      }
+                          }
+                    }
+                }
+                stage ('Deploy to production') {
+                    steps {
+                        script {
+                        props = readProperties file: 'build.cnf'
+                        }
+                        echo "current version is ${props['deply.version']}"
                     }
                 }
             }
