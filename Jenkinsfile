@@ -11,12 +11,8 @@ stages{
         stage('Build'){
             steps {
                 sh 'mvnw clean package'
+                echo 'build success'
             }
-            post {
-                success {
-                    echo 'Archiving the artifacts'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
             }
         }
 
