@@ -6,13 +6,11 @@ pipeline {
     tools {
         maven 'local_maven'
     }
-    
 stages{
         stage('Build'){
             steps {
                 sh 'mvnw clean package'
                 echo 'build success'
-            }
             }
         }
 
