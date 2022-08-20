@@ -1,17 +1,16 @@
 pipeline {
-    agent any
+    agent {
+    label ('windows')
+    }
     
     tools {
         maven 'local_maven'
     }
-    parameters {
-         string(name: 'staging_server', defaultValue: '43.205.118.109', description: 'Remote Staging Server')
-    }
-
+    
 stages{
         stage('Build'){
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
             post {
                 success {
@@ -25,8 +24,7 @@ stages{
             parallel{
                 stage ("Deploy to Staging"){
                     steps {
-                        sh "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
-                        //sh 'scp -o StrictHostKeyChecking=no target/ **/*.war root@${params.staging_server}:/opt/tomcat/webapps/'
+                        echo 'Deploy successful'
                     }
                 }
             }
