@@ -4,9 +4,9 @@ pipeline {
     tools {
         maven 'local_maven'
     }
-    parameters {
-         string(name: 'staging_server', defaultValue: '13.232.37.20', description: 'Remote Staging Server')
-    }
+     environment {     
+         DOCKERHUB_CREDENTIALS= credentials('docker-hub')     
+       } 
 
 stages{
         stage('Build'){
@@ -20,15 +20,29 @@ stages{
                 }
             }
         }
+    stage('Build Docker Image') {         
+      steps{                
+	sh 'sudo docker build -t jyotiranswain/wabapp2:$BUILD_NUMBER .'           
+        echo 'Build Image Completed'                
+      }           
+    }
+    stage('Login to Docker Hub') {         
+      steps{                            
+	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 
+	echo 'Login Completed'                
+      }           
+    }               
+    stage('Push Image to Docker Hub') {         
+      steps{                            
+	sh 'sudo docker push jyotiranswain/wabapp2:$BUILD_NUMBER'                 
+  echo 'Push Image Completed'       
+      }           
+    }      
+  } //stages 
+  post{
+    always {  
+      sh 'docker logout'           
+    }      
 
-        stage ('Deployments'){
-            parallel{
-                stage ("Deploy to Staging"){
-                    steps {
-                        sh "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
-                    }
-                }
-            }
-        }
     }
 }
