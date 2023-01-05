@@ -45,7 +45,7 @@ stages{
     }      
 
     }
-    stage('Build'){
+    stage('Docker'){
             steps {
                 sh 'ssh root@13.233.92.158 "docker run -d --name=webapp1 -p 8282:8080 jyotiranswain/wabapp2:$BUILD_NUMBER"'
             }
