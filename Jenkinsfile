@@ -37,7 +37,7 @@ stages{
 	sh 'docker push jyotiranswain/wabapp2:$BUILD_NUMBER'                 
   echo 'Push Image Completed'       
       }           
-    }
+    }      
   } //stages 
   post{
     always {  
@@ -45,5 +45,4 @@ stages{
     }      
 
     }
-   
 }
