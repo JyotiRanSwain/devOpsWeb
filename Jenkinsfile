@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     
@@ -37,7 +38,16 @@ stages{
 	sh 'docker push jyotiranswain/wabapp2:$BUILD_NUMBER'                 
   echo 'Push Image Completed'       
       }           
-    }      
+    }
+  stage('Run Container on Dev Server') {         
+      steps{
+        def dockerRun = 'docker run -p 8383:8080 -d --name myweb1 jyotiranswain/wabapp2:$BUILD_NUMBER'
+       sshagent(['ec2-user']) {
+	       sh "ssh -o StrictHostKeyChecking=no ec2-user@65.2.9.43 ${dockerRun}"
+}
+      }           
+    }   
+
   } //stages 
   post{
     always {  
